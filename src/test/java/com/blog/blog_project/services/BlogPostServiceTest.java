@@ -51,7 +51,7 @@ class BlogPostServiceTest {
     public void shouldFindPostById(){
 
         BlogPost post = new BlogPost(12L, "Myy blog post", LocalDateTime.now(), LocalDateTime.now(), "blurb", "full text", "wwww.image.com", "pompy", new HashSet<>(), null);
-        PostResponse expectedPostResponse = new PostResponse(12L, "pompy", "Myy blog post", "www.image.com", "blurb", "full text", new HashSet<>());
+        PostResponse expectedPostResponse = new PostResponse(12L, "pompy", "Myy blog post", "www.image.com", "blurb", "full text", "test date", new HashSet<>());
 
         when(blogPostRepository.findById(12L)).thenReturn(Optional.of(post));
         when(postMapper.mapToDto(Mockito.any(BlogPost.class))).thenReturn(expectedPostResponse);

@@ -5,6 +5,7 @@ import com.blog.blog_project.exceptions.ZcwBlogException;
 import com.blog.blog_project.repositories.RefreshTokenRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Transactional
+@Slf4j
 public class RefreshTokenService {
 
     @Autowired
@@ -24,7 +26,7 @@ public class RefreshTokenService {
     RefreshToken generateRefreshToken(){
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setToken(UUID.randomUUID().toString());
-      //  refreshToken.setCreatedDate(new LocalDateTime()); I don't think we need this
+       refreshToken.setCreatedDate(Instant.now());
 
         return refreshTokenRepository.save(refreshToken);
     }
@@ -35,6 +37,8 @@ public class RefreshTokenService {
     }
 
     public void deleteRefreshToken(String token){
+        log.info("Refresh token successfully deleted. User logged out!");
         refreshTokenRepository.deleteByToken(token);
+
     }
 }

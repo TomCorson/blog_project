@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -18,6 +20,7 @@ public class PostResponse {
     private String imageLink;
     private String blurb;
     private String fullText;
+    private String creationTimestamp;
     private Set<Tag> tags;
 
 

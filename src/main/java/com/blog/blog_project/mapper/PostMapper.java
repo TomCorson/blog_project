@@ -12,12 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @Component
 public class  PostMapper {
 
-
+    public static final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yyyy 'at' hh:mm a");
 
     public BlogPost map(PostRequest postRequest, User user){
         if (postRequest == null && user == null){
@@ -52,6 +53,7 @@ public class  PostMapper {
         postResponse.setTitle(blogPost.getTitle());
         postResponse.setBlurb(blogPost.getBlurb());
         postResponse.setFullText(blogPost.getFulltext());
+        postResponse.setCreationTimestamp(blogPost.getCreationTimestamp().format(dateFormat));
         postResponse.setTags(blogPost.getTags());
         postResponse.setImageLink(blogPost.getImagelink());
 

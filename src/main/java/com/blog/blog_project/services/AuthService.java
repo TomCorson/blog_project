@@ -102,7 +102,7 @@ public class AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String token = jwtUtils.generateJwtToken(authenticate);
-
+        log.info("User login successful!");
         return AuthenticationResponse.builder()
                     .authenticationToken(token)
                     .refreshToken(refreshTokenService.generateRefreshToken().getToken())
@@ -114,6 +114,7 @@ public class AuthService {
     public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) throws ZcwBlogException{
         refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
         String token = jwtUtils.generateTokenWithUserName(refreshTokenRequest.getUsername());
+        log.info("refresh token successfully generated");
             return AuthenticationResponse.builder()
                     .authenticationToken(token)
                     .refreshToken(refreshTokenRequest.getRefreshToken())
